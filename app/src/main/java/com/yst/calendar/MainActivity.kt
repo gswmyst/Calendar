@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         when (id){
             0->{
                 startActivity(Intent(this,SettingActivity::class.java))//打开设置activity
-                finish()//关闭这个activity
             }
         }
         return super.onOptionsItemSelected(item)
