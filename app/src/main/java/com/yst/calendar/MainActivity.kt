@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDate
 import java.time.Period
@@ -29,4 +31,21 @@ class MainActivity : AppCompatActivity() {
         val days=today.toEpochDay()-startdate.toEpochDay()+1//计算相差天数
         textview.text="今天是"+strmyname+"和"+strlovename+"在一起的第"+days+"天"//输出
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {//添加菜单
+        menu?.add(Menu.NONE,0,0,"重新设置")
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {//点击重新设置菜单
+        val id=item.itemId
+        when (id){
+            0->{
+                startActivity(Intent(this,SettingActivity::class.java))//打开设置activity
+                finish()//关闭这个activity
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
