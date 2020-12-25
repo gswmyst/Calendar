@@ -4,4 +4,6 @@
     <string name="input_lovers_name">输入他/她的称呼</string>
     <string name="select_date">选择开始日期</string>
     <string name="button">完成</string>
+    <string name="days">显示天数</string>
+    <string name="yy_mm_dd">显示年月日</string>
 </resources>

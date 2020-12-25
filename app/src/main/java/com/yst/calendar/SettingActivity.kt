@@ -42,8 +42,9 @@ class SettingActivity : AppCompatActivity() {
             val str=datePicker.year.toString()+"-"+month+"-"+day//设置为iso标准日期格式
             editor.putString("date",str)//添加日期
             if (editor.commit()) {//提交后打开MainActivity
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()//关闭这个activity
+                val intent=Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
             }
         }
     }
