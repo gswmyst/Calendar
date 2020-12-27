@@ -3,10 +3,10 @@ package com.yst.calendar
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
@@ -43,7 +43,7 @@ class SettingActivity : AppCompatActivity() {
             editor.putString("date",str)//添加日期
             if (editor.commit()) {//提交后打开MainActivity
                 val intent=Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK//关闭task来关闭所有activity并打开新task
                 startActivity(intent)
             }
         }
