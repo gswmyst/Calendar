@@ -1,20 +1,14 @@
 package com.yst.calendar
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.media.Image
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.nanchen.compresshelper.CompressHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -27,8 +21,6 @@ import android.content.pm.PackageManager
 import android.app.Activity
 import android.graphics.BitmapFactory
 import android.text.TextUtils
-import android.widget.CompoundButton
-import kotlinx.android.synthetic.main.activity_setting.*
 import java.io.FileOutputStream
 import java.lang.Exception
 
@@ -45,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         verifyStoragePermissions(this)
-        val sp:SharedPreferences=this.getSharedPreferences("preference",Context.MODE_PRIVATE)//sharedpreference对象
+        val sp:SharedPreferences=this.getSharedPreferences("preference", MODE_PRIVATE)//sharedpreference对象
         val strmyname=sp.getString("myname","")//获取sharedpreference中我的称呼
         if (strmyname.equals(""))//如果没有我的称呼则去设置activity
         {
@@ -57,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val startdate=LocalDate.parse(startdatestr)//开始时间string转化为localdate
         val today=LocalDate.now()//获取当前日期
         val period=Period.between(startdate,today)//获取period,包含年月日
-        val days=today.toEpochDay()-startdate.toEpochDay()+1//计算相差天数
+        var days=today.toEpochDay()-startdate.toEpochDay()+1//计算相差天数
         textview.text="今天是"+strmyname+"和"+strlovename+"在一起的第"+days+"天"//输出
         val path=getExternalFilesDir("background/background.jpg").toString()//图片路径
         if (!TextUtils.isEmpty(path)){//路径不存在则不加载图片
@@ -72,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         switch1.setOnCheckedChangeListener{switch1,isChecked->//切换天数格式
             if (isChecked){
                 switch1.text=getString(R.string.yy_mm_dd)
-                val days=period.days+1
+                days= (period.days+1).toLong()
                 if (period.years==0 && period.months==0)
                     textview.text="今天是"+strmyname+"和"+strlovename+"在一起的第"+days+"天"
                 else if (period.years==0)
@@ -95,11 +87,11 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {//点击重新设置菜单
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){//判断打开的是哪个菜单项
-            0 -> startActivity(Intent(this,SettingActivity::class.java))//打开设置activity
-            1->{
-                var getAlbum = Intent(Intent.ACTION_PICK)
+            0 -> startActivity(Intent(this,SettingActivity::class.java))//点击重新设置菜单打开设置activity
+            1->{//点击选择图片打开相册
+                val getAlbum = Intent(Intent.ACTION_PICK)
                 getAlbum.type = "image/*"
                 startActivityForResult(getAlbum,imagecode)
             }

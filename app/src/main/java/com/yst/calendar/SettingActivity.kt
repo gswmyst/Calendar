@@ -43,8 +43,9 @@ class SettingActivity : AppCompatActivity() {
             editor.putString("date",str)//添加日期
             if (editor.commit()) {//提交后打开MainActivity
                 val intent=Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK//关闭task来关闭所有activity并打开新task
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
+                finish()
             }
         }
     }
