@@ -25,19 +25,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val sp: SharedPreferences = this.getSharedPreferences("preference", MODE_PRIVATE)//sharedpreference对象
-        val strmyname = sp.getString("myname", "")//获取sharedpreference中我的称呼
-        if (strmyname.equals(""))//如果没有我的称呼则去设置activity
+        val strMyName = sp.getString("myname", "")//获取sharedpreference中我的称呼
+        if (strMyName.equals(""))//如果没有我的称呼则去设置activity
         {
             startActivity(Intent(this, SettingActivity::class.java))//打开设置activity
             finish()//关闭这个activity
         }
-        val strlovename = sp.getString("lovername", "")//获取对方的称呼
-        val startdatestr = sp.getString("date", "")//获取开始时间
-        val startdate = LocalDate.parse(startdatestr)//开始时间string转化为localdate
+        val strLovesName = sp.getString("lovername", "")//获取对方的称呼
+        val startDateStr = sp.getString("date", "")//获取开始时间
+        val startDate = LocalDate.parse(startDateStr)//开始时间string转化为localdate
         val today = LocalDate.now()//获取当前日期
-        val period = Period.between(startdate, today)//获取period,包含年月日
-        val days = today.toEpochDay() - startdate.toEpochDay() + 1//计算相差天数
-        textview.text = "今天是" + strmyname + "和" + strlovename + "在一起的第" + days + "天"//输出
+        val period = Period.between(startDate, today)//获取period,包含年月日
+        val days = today.toEpochDay() - startDate.toEpochDay() + 1//计算相差天数
+        textview.text = "今天是" + strMyName + "和" + strLovesName + "在一起的第" + days + "天"//输出
         val path = getExternalFilesDir("background/background.jpg").toString()//图片路径
         if (!TextUtils.isEmpty(path)) {//路径不存在则不加载图片
             val bitmap = BitmapFactory.decodeFile(path)
@@ -54,17 +54,17 @@ class MainActivity : AppCompatActivity() {
                 switch1.text = getString(R.string.yy_mm_dd)
                 val day = (period.days + 1).toLong()
                 if (period.years == 0 && period.months == 0)
-                    textview.text = "今天是" + strmyname + "和" + strlovename + "在一起的第" + day + "天"
+                    textview.text = "今天是" + strMyName + "和" + strLovesName + "在一起的第" + day + "天"
                 else if (period.years == 0)
-                    textview.text = "今天是" + strmyname + "和" + strlovename + "在一起的第" + period.months + "月" + day + "天"
+                    textview.text = "今天是" + strMyName + "和" + strLovesName + "在一起的第" + period.months + "月" + day + "天"
                 else if (period.months == 0)
-                    textview.text = "今天是" + strmyname + "和" + strlovename + "在一起的第" + period.years + "年" + day + "天"
+                    textview.text = "今天是" + strMyName + "和" + strLovesName + "在一起的第" + period.years + "年" + day + "天"
                 else
                     textview.text =
-                        "今天是" + strmyname + "和" + strlovename + "在一起的第" + period.years + "年" + period.months + "月" + day + "天"
+                        "今天是" + strMyName + "和" + strLovesName + "在一起的第" + period.years + "年" + period.months + "月" + day + "天"
             } else {
                 switch1.text = getString(R.string.days)
-                textview.text = "今天是" + strmyname + "和" + strlovename + "在一起的第" + days + "天"
+                textview.text = "今天是" + strMyName + "和" + strLovesName + "在一起的第" + days + "天"
             }
         }
     }

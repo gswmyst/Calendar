@@ -28,9 +28,8 @@ class BackgroundBitmap(private val activity: MainActivity, uri: Uri) {
         input = activity.contentResolver.openInputStream(uri)
         if (originalWidth > width && originalHeight > height) {
             //如果图片宽高均大于手机分辨率对图片进行压缩
-            var ratio = 1
-            ratio = if ((originalHeight / height) > (originalWidth / width)) {
-                originalWidth / width;
+            val ratio: Int = if ((originalHeight / height) > (originalWidth / width)) {
+                originalWidth / width
             } else {
                 originalHeight / height
             }
