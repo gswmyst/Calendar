@@ -10,8 +10,8 @@ android {
         applicationId "com.yst.calendar"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,5 +33,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.github.nanchen2251:CompressHelper:1.0.5'
+    implementation 'com.github.MingYueChunQiu:BitmapHelper:0.1.4'
+    implementation "androidx.exifinterface:exifinterface:1.3.2"
 }
